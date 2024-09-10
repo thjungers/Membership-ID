@@ -1,4 +1,4 @@
-# Sport Ardent ID
+# Membership ID check service for Sport Ardent
 
 Simple web app to check the validity of a membership card.
 

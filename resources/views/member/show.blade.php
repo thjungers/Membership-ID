@@ -16,6 +16,7 @@
                         x-data="{}" 
                         x-on:submit="if(!confirm('Supprimer ce membre?')) $event.preventDefault()"
                     >
+                        @csrf
                         <x-primary-button-link href="/m/{{ $member->qr_key }}" target="_blank" title="Afficher la carte du membre">
                             Afficher la carte <i class="fa-regular fa-eye ms-3"></i> 
                         </x-primary-button-link>

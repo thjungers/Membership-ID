@@ -1,49 +1,49 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gestion des cartes de membres Sport Ardent</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <a href="/" class="navbar-brand">Sport Ardent - Gestion des cartes de membres</a>
-        </div>
-    </nav>
-    <div class="container text-center">
-        <div class="m-5">
-            <form
-                action="/members/{{ $member?->id }}"
-                method="POST"
-            >
-                @csrf
-                @if ($member)
-                    @method("PATCH")                    
-                @endif
-                <input 
-                    type="text" class="form-control" required
-                    name="first_name" value="{{ $member?->first_name }}"
-                    placeholder="Prénom"
-                >
-                <input 
-                    type="text" class="form-control" required
-                    name="last_name" value="{{ $member?->last_name }}"
-                    placeholder="Nom de famille"
-                    style="font-variant: small-caps"
-                >
-                <input 
-                    type="email" class="form-control" required
-                    name="email" value="{{ $member?->email }}"
-                    placeholder="Adresse e-mail"
-                >
-                <button type="submit" class="form-control btn btn-primary">{{ $member ? 'Modifier' : 'Créer' }}</button>
-            </form>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            @if ($member)
+                {{ $member->first_name }} <span style="font-variant: small-caps">{{ $member->last_name }}</span>
+            @else
+                Nouveau membre
+            @endif
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form
+                        action="/members/{{ $member?->id }}"
+                        method="POST"
+                        class="space-y-6"
+                    >
+                        @csrf
+                        @if ($member)
+                            @method("PATCH")                    
+                        @endif
+                        
+                        <div>
+                            <x-input-label for="update_first_name" value="Prénom" />
+                            <x-text-input id="update_first_name" name="first_name" required class="mt-1 block w-full" :value="old('first_name', $member?->first_name)" />
+                            <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
+                        </div>
+                        <div>
+                            <x-input-label for="update_last_name" value="Nom de famille" />
+                            <x-text-input id="update_last_name" name="last_name" required class="mt-1 block w-full" style="font-variant: small-caps" :value="old('last_name', $member?->last_name)" />
+                            <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+                        </div>
+                        <div>
+                            <x-input-label for="update_email" value="Adresse e-mail" />
+                            <x-text-input id="update_email" name="email" type="email" required class="mt-1 block w-full" :value="old('email', $member?->email)" />
+                            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                        </div>
+                        <div>
+                            <x-primary-button>{{ $member ? 'Modifier' : 'Créer' }}</x-primary-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</x-app-layout>

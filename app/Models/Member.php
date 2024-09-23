@@ -27,7 +27,7 @@ class Member extends Model
      */
     function has_paid_registration()
     {
-        $payments = \App\Helpers\getSheetValues("TRESORERIE", 600);
+        $payments = \App\Helpers::getSheetValues("TRESORERIE", 600);
 
         # Check header
         if(!($payments[0][1] == "Membre" && $payments[0][2] == "Payement"))

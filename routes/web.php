@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/m/{member:qr_key}', [MemberController::class, 'show_card']);
+    Route::get('/m/{member:qr_key}', [MemberController::class, 'show_card'])->name('card.show');
     Route::resource('members', MemberController::class);
 });
 

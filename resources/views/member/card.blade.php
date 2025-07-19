@@ -91,7 +91,7 @@
                     <small>Club inclusif</small>
                 </div>
             </div>
-            <h2 class="text-nowrap" style="position: relative; top: 10px;">Saison 2023-2024</h2>
+            <h2 class="text-nowrap" style="position: relative; top: 10px;">Saison {{ $season }}</h2>
         </div>
         <h5 class="text-center font-italic pb-4">Carte de membre</h3>
         <div class="text-center">
@@ -114,6 +114,9 @@
                 @endif
             </div>
         </div>
+    </div>
+    <div style="width: 15em">
+        <img src="/{{ $card_image }}" />
     </div>
 </body>
 </html>

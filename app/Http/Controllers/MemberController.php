@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 use App\Models\Member;
+use App\CardImage;
 
 class MemberController extends Controller
 {
@@ -57,8 +58,11 @@ class MemberController extends Controller
      */
     public function show_card(Member $member)
     {
+        // $url = route('card.show', ['member' => $member]);
         return view('member.card', [
-            'member' => $member
+            'member' => $member,
+            'season' => env("APP_SEASON"),
+            'card_image' => CardImage::generate($member, env("APP_SEASON"))
         ]);
     }
 

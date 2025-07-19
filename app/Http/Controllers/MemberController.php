@@ -40,6 +40,8 @@ class MemberController extends Controller
         $new_member->qr_key = fake()->regexify('[A-Za-z0-9_-]{5}');
         $new_member->save();
 
+        CardImage::generate($new_member, env("APP_SEASON"));
+
         return redirect('/members/' . $new_member->id);
     }
 
@@ -54,16 +56,23 @@ class MemberController extends Controller
     }
 
     /**
-     * Display the virtual card member.
+     * Display the virtual member card.
      */
     public function show_card(Member $member)
     {
-        // $url = route('card.show', ['member' => $member]);
         return view('member.card', [
             'member' => $member,
-            'season' => env("APP_SEASON"),
-            'card_image' => CardImage::generate($member, env("APP_SEASON"))
+            'season' => env("APP_SEASON")
         ]);
+    }
+
+    /** 
+     * Generate the image member card.
+     */
+    public function generate_image(Member $member)
+    {
+        $url = CardImage::generate($member, env("APP_SEASON"));
+        return redirect($url);
     }
 
     /**

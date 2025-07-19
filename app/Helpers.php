@@ -7,7 +7,7 @@ class Helpers
     static function getGapiClient()
     {
         $client = new \Google\Client();
-        $client->setAuthConfig(storage_path() . env("GAPI_SERVICE_ACCOUNT_PATH"));
+        $client->setAuthConfig(storage_path("secrets/") . env("GAPI_SERVICE_ACCOUNT_PATH"));
         $client->setScopes(["https://www.googleapis.com/auth/spreadsheets.readonly"]);
         return $client;
     }

@@ -115,8 +115,5 @@
             </div>
         </div>
     </div>
-    <div style="width: 15em">
-        <img src="/{{ $card_image }}" />
-    </div>
 </body>
 </html>

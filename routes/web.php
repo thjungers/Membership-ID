@@ -8,12 +8,13 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/m/{member:qr_key}', [MemberController::class, 'show_card'])->name('card.show');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/m/{member:qr_key}', [MemberController::class, 'show_card'])->name('card.show');
     Route::get('/generate/{member:qr_key}', [MemberController::class, 'generate_card']);
     Route::resource('members', MemberController::class);
 });

@@ -15,7 +15,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/generate/{member:qr_key}', [MemberController::class, 'generate_card']);
+    Route::get('/generate/{member:id}', [MemberController::class, 'generate_image']);
     Route::resource('members', MemberController::class);
 });
 

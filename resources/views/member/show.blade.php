@@ -17,9 +17,15 @@
                         x-on:submit="if(!confirm('Supprimer ce membre?')) $event.preventDefault()"
                     >
                         @csrf
-                        <x-primary-button-link href="/m/{{ $member->qr_key }}" target="_blank" title="Afficher la carte du membre">
-                            Afficher la carte <i class="fa-regular fa-eye ms-3"></i> 
+                        <x-primary-button-link href="/m/{{ $member->qr_key }}" target="_blank" title="Afficher la carte virtuell du membre">
+                            Carte virtuelle <i class="fa-regular fa-eye ms-3"></i> 
                         </x-primary-button-link>
+                        <x-primary-button-link href="/img/cards/{{ $member->qr_key }}.png" target="_blank" title="Afficher la carte générée">
+                            Carte générée <i class="fa-regular fa-id-card ms-3"></i> 
+                        </x-primary-button-link>
+                        <x-secondary-button-link href="/generate/{{ $member->id }}" target="_blank" title="Générer la carte du membre">
+                            Générer la carte <i class="fa-solid fa-hammer ms-3"></i> 
+                        </x-secondary-button-link>
                         <x-secondary-button-link href="/members/{{ $member->id }}/edit" title="Modifier la fiche du membre">
                             Modifier la fiche <i class="fa-regular fa-pen-to-square ms-3"></i> 
                         </x-secondary-button-link>

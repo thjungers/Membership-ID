@@ -25,6 +25,7 @@ jobs:
         run: composer install --prefer-dist --no-progress
       - name: Store secrets
         run: |
+          mkdir storage/secrets
           echo "${{ secrets.DOTENV_PROD }}" > .env
           echo "${{ secrets.GAPI_SERVICE_ACCOUNT }}" > storage/secrets/service-account.json
       - name: Deploy to FTP

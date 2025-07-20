@@ -23,8 +23,10 @@ jobs:
             ${{ runner.os }}-php-
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
-      - name: Store env vars to .env
-        run: echo "${{ secrets.DOTENV_PROD }}" > .env
+      - name: Store secrets
+        run: |
+          echo "${{ secrets.DOTENV_PROD }}" > .env
+          echo "${{ secrets.GAPI_SERVICE_ACCOUNT }}" > storage/secrets/service-account.json
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4
         with:

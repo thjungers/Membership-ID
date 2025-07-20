@@ -34,7 +34,7 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-        $input = $request->all();
+        $input = $request->validated();
         
         $new_member = new Member($input);
         $new_member->qr_key = fake()->regexify('[A-Za-z0-9_-]{5}');

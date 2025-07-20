@@ -9,11 +9,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
+      - name: Setup nodejs
+        uses: actions/setup-node@v4
       - name: Store secrets
         run: |
           mkdir storage/secrets
           echo '${{ secrets.DOTENV_PROD }}' > .env
           echo '${{ secrets.GAPI_SERVICE_ACCOUNT }}' > storage/secrets/service-account.json
+      - name: Build Vite
+        run: npm run build
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -21,7 +25,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ vars.FTP_SERVER_DIR }}
-      - name: Install Composer packages
+      - name: Install Composer packages and Optimize Laravel
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ vars.SSH_SERVER }}

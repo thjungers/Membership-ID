@@ -9,20 +9,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
-      - name: Setup PHP
-        uses: shivammathur/setup-php@2.34.1
-        with:
-          php-version: "8.3"
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v4.2.3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
       - name: Store secrets
         run: |
           mkdir storage/secrets
@@ -35,4 +21,12 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ vars.FTP_SERVER_DIR }}
-
+      - name: Install Composer packages
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ vars.SSH_SERVER }}
+          username: ${{ vars.FTP_USERNAME }}
+          password: ${{ vars.FTP_PASSWORD }}
+          script: |
+            cd ${{ vars.FTP_SERVER_DIR }}
+            composer install --prefer-dist --no-progress

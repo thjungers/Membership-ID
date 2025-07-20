@@ -25,8 +25,8 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ vars.SSH_SERVER }}
-          username: ${{ vars.FTP_USERNAME }}
-          password: ${{ vars.FTP_PASSWORD }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           script: |
             cd ${{ vars.FTP_SERVER_DIR }}
             composer install --prefer-dist --no-progress

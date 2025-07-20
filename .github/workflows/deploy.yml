@@ -12,8 +12,8 @@ jobs:
       - name: Store secrets
         run: |
           mkdir storage/secrets
-          echo "${{ secrets.DOTENV_PROD }}" > .env
-          echo "${{ secrets.GAPI_SERVICE_ACCOUNT }}" > storage/secrets/service-account.json
+          echo '${{ secrets.DOTENV_PROD }}' > .env
+          echo '${{ secrets.GAPI_SERVICE_ACCOUNT }}' > storage/secrets/service-account.json
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

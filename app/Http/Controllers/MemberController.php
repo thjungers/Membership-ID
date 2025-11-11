@@ -38,6 +38,7 @@ class MemberController extends Controller
         
         $new_member = new Member($input);
         $new_member->qr_key = fake()->regexify('[A-Za-z0-9_-]{5}');
+        $new_member->pin = fake()->numerify('####');
         $new_member->save();
 
         CardImage::generate($new_member, env("APP_SEASON"));
@@ -52,17 +53,6 @@ class MemberController extends Controller
     {
         return view('member.show', [
             'member' => $member
-        ]);
-    }
-
-    /**
-     * Display the virtual member card.
-     */
-    public function show_card(Member $member)
-    {
-        return view('member.card', [
-            'member' => $member,
-            'season' => env("APP_SEASON")
         ]);
     }
 

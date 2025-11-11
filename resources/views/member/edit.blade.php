@@ -39,6 +39,10 @@
                             <x-input-error class="mt-2" :messages="$errors->get('email')" />
                         </div>
                         <div>
+                            <x-input-label for="pin" value="PIN" />
+                            <x-text-input id="pin" name="pin" type="text" disabled class="mt-1 block w-full" :value="$member->pin" />
+                        </div>
+                        <div>
                             <x-primary-button>{{ $member ? 'Modifier' : 'Créer' }}</x-primary-button>
                         </div>
                     </form>

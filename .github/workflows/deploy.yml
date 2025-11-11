@@ -41,4 +41,3 @@ jobs:
             php composer-setup.php
             php -r "unlink('composer-setup.php');"
             php composer.phar install --prefer-dist --no-progress
-            php artisan optimize

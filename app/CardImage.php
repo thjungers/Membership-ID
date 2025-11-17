@@ -96,7 +96,7 @@ class CardImage
         );
 
         // Save to file
-        $filename = "img/cards/". $member->qr_key .".png";
+        $filename = "img/cards/". $member->qr_key .".pdf";
         $template->writeImage(public_path($filename));
 
         $template->destroy();

@@ -20,7 +20,7 @@
                         <x-primary-button-link href="/m/{{ $member->qr_key }}" target="_blank" title="Afficher la carte virtuell du membre">
                             Carte virtuelle <i class="fa-regular fa-eye ms-3"></i> 
                         </x-primary-button-link>
-                        <x-primary-button-link href="/img/cards/{{ $member->qr_key }}.png" target="_blank" title="Afficher la carte générée">
+                        <x-primary-button-link href="/img/cards/{{ $member->qr_key }}.pdf" target="_blank" title="Afficher la carte générée">
                             Carte générée <i class="fa-regular fa-id-card ms-3"></i> 
                         </x-primary-button-link>
                         <x-secondary-button-link href="/generate/{{ $member->id }}" target="_blank" title="Générer la carte du membre">

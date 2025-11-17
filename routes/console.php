@@ -1,8 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+// Load in cache data from Google Sheets
+Schedule::call(function () {
+    $files = ["TRESORERIE", "BADMINTON", "NATATION"];
+
+    foreach ($files as $file) {
+        \App\Helpers::getSheetValues($file, env('GAPI_CACHE_TTL'));
+    }
+})->hourly();

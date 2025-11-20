@@ -9,4 +9,4 @@ Schedule::call(function () {
     foreach ($files as $file) {
         \App\Helpers::getSheetValues($file, env('GAPI_CACHE_TTL'));
     }
-})->hourly();
+})->everyMinute();

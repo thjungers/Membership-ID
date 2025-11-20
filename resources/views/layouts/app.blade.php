@@ -33,6 +33,24 @@
             </header>
         @endisset
 
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+
+    @if (session('mail_sent'))
+        <!-- Toast -->
+        <div class="absolute top-5 right-5 bg-green-700 rounded-sm" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="bg-white px-4 py-1 text-sm">
+                <i class="fa-regular fa-paper-plane"></i>
+                <strong>Mail envoyé</strong>
+            </div>
+            <div class="px-4 py-2 text-green-100">
+                {{ session('mail_sent') }}
+            </div>
+        </div>
+    @endif
 </body>
 
 </html>

@@ -24,15 +24,18 @@
                             Carte générée <i class="fa-regular fa-id-card ms-3"></i> 
                         </x-primary-button-link>
                         <x-secondary-button-link href="/generate/{{ $member->id }}" target="_blank" title="Générer la carte du membre">
-                            Générer la carte <i class="fa-solid fa-hammer ms-3"></i> 
+                            Générer <i class="fa-solid fa-hammer ms-3"></i> 
+                        </x-secondary-button-link>
+                        <x-secondary-button-link href="/send-mail/{{ $member->id }}" title="Envoyer la carte par e-mail">
+                            Envoyer <i class="fa-solid fa-envelope ms-3"></i> 
                         </x-secondary-button-link>
                         <x-secondary-button-link href="/members/{{ $member->id }}/edit" title="Modifier la fiche du membre">
-                            Modifier la fiche <i class="fa-regular fa-pen-to-square ms-3"></i> 
+                            Modifier <i class="fa-regular fa-pen-to-square ms-3"></i> 
                         </x-secondary-button-link>
                         
                         @method("DELETE")
                         <x-danger-button>
-                            Supprimer le membre <i class="fa-regular fa-trash-can ms-3"></i>
+                            Supprimer <i class="fa-regular fa-trash-can ms-3"></i>
                         </x-danger-button>
                     </form>
                 </div>

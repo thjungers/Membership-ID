@@ -15,7 +15,7 @@ class CardController extends Controller
         return view('member.card', [
             'member' => $member,
             'details' => false,
-            'season' => env("APP_SEASON")
+            'season' => env("APP_SEASON"),
         ]);
     }
 

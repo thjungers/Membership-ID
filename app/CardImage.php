@@ -96,41 +96,22 @@ class CardImage
         );
 
         // Save to file
-        $filename = "img/cards/". $member->qr_key .".pdf";
-        $template->writeImage(public_path($filename));
+        $path = self::getPath($member);
+        $template->writeImage(public_path($path));
 
         $template->destroy();
         $qrcode->destroy();
 
-        return $filename;
+        return $path;
+    }
 
-
-
-        // $qrcode = new \DOMDocument;
-        // $qrcode->loadXML($qrcode_str);
-
-        // $template = new \DOMDocument;
-        // $template->load(resource_path("card_template.svg"));
-
-        // foreach ($template->getElementsByTagName("g") as $group) {
-        //     if($group->id == "template-card-group-qrcode") {
-        //         foreach ($qrcode->firstElementChild->childNodes as $node) {
-        //             $importedNode = $template->importNode($node);
-        //             $group->append($importedNode);
-        //         }
-        //     }
-        //     elseif($group->id == "template-card-group-member-name") {
-        //         $nameNode = $template->createElement(
-        //             "text",
-        //             $member->first_name ." ". $member->last_name
-        //         );
-        //         $nameNode->setAttribute("text-anchor", "middle");
-        //         $nameNode->setAttribute("font-weight", "bold");
-        //         $nameNode->setAttribute("font-family", "Kallisto Bold");
-        //         $group->append($nameNode);
-        //     }
-        // }
-
-        // return $template->saveXML();
+    /**
+     * Get the path to the card for a given member
+     * 
+     * @param member: The member to get the card path for
+     */
+    static public function getPath($member)
+    {
+        return "/cards/". $member->qr_key .".pdf";
     }
 }

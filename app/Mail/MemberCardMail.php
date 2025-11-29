@@ -2,11 +2,13 @@
 
 namespace App\Mail;
 
+use App\CardImage;
 use App\Models\Member;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
@@ -55,6 +57,14 @@ class MemberCardMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        $filename = 'carte-de-membre_'
+            .$this->member->first_name
+            .'-'
+            .$this->member->last_name
+            .'.pdf';
+        $filepath = CardImage::getPath($this->member);
+        return [
+            Attachment::fromPath(public_path($filepath))->as($filename)
+        ];
     }
 }

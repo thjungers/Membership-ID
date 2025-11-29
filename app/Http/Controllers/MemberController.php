@@ -6,6 +6,8 @@ use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 use App\Models\Member;
 use App\CardImage;
+use App\Mail\MemberCardMail;
+use Illuminate\Support\Facades\Mail;
 
 class MemberController extends Controller
 {
@@ -63,6 +65,22 @@ class MemberController extends Controller
     {
         $url = CardImage::generate($member, env("APP_SEASON"));
         return redirect($url);
+    }
+
+    /**
+     * Send the member card by mail
+     */
+    public function send_mail(Member $member)
+    {
+        // Generate the Card to make sure it is up to date
+        $cardUrl = CardImage::generate($member, env("APP_SEASON"));
+        $name = $member->first_name . ' ' . $member->last_name;
+        Mail::to($member, $name)->send(new MemberCardMail($member));
+
+        return redirect("/")->with(
+            'mail_sent', 
+            'Carte envoyée par e-mail à ' . $member->first_name . ' ' . $member->last_name
+        );
     }
 
     /**

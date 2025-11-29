@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/generate/{member:id}', [MemberController::class, 'generate_image']);
+    Route::get('/send-mail/{member:id}', [MemberController::class, 'send_mail']);
     Route::resource('members', MemberController::class);
 });
 

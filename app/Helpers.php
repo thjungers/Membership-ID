@@ -32,4 +32,22 @@ class Helpers
         });
         return $values;
     }
+
+    /**
+     * Get the total number of cards taken by the member in the given row.
+     * 
+     * @param $row The row for the member to query
+     * @param $headers The row of headers for the file
+     */
+    static function getNumberCardsTaken($row, $headers)
+    {
+        $total = 0;
+        foreach ($headers as $idx => $header) {
+            if (str_starts_with($header, "Carte")) {
+                $total += $row[$idx];
+            }
+        }
+
+        return $total;
+    }
 }

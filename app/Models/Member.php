@@ -71,9 +71,8 @@ class Member extends Model
         # Check header
         $idx_remaining = array_search("Séances\nrestantes", $participations[0]);
         $idx_part = array_search("Part.\npayantes", $participations[0]);
-        $idx_cards = array_search("Carte de\n10 séances", $participations[0]);
         $header_str = json_encode($participations[0]);
-        if(!$idx_remaining || !$idx_part || !$idx_cards)
+        if(!$idx_remaining || !$idx_part)
             throw new \ValueError("Unexpected GSheet header for '$section': $header_str");
 
         # Try to find a match
@@ -93,7 +92,7 @@ class Member extends Model
                 return new PaymentMethod(
                     PaymentMethodType::Card,
                     $row[$idx_remaining],
-                    $row[$idx_cards] == 0
+                    \App\Helpers::getNumberCardsTaken($participations[0], $row) == 0
                         ? Carbon::parse(env('VALIDITY_CARD_OLD'))
                         : Carbon::parse(env('VALIDITY_CARD_NEW'))
                 );

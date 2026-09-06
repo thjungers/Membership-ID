@@ -35,7 +35,7 @@
         @endif
         @if ($details && $paid)
             <ul class="text-start mt-3 mx-5 list-unstyled">
-                @foreach (['cotisation', 'badminton', 'natation'] as $section)
+                @foreach (['cotisation', 'badminton', 'natation', 'yoga'] as $section)
                     @php $payment_method = $member->current_payment_method($section) @endphp
                     @if ($payment_method !== null)
                         <li class="mb-1">
